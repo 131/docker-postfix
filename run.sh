@@ -68,7 +68,8 @@ fi
 add_config_value "mynetworks" "${SMTP_NETWORKS}"
 
 if [ ! -z "${OVERWRITE_FROM}" ]; then
-  echo -e "/^From:.*$/ REPLACE From: $OVERWRITE_FROM" > /etc/postfix/smtp_header_checks
+  echo -e "/^From:\s*([^<]*)$/ REPLACE From: $OVERWRITE_FROM" > /etc/postfix/smtp_header_checks
+  echo -e "/^From:\s*([^<]*?)(\s+<.*?>)?$/ REPLACE From: \"\$1\" <$OVERWRITE_FROM>" >> /etc/postfix/smtp_header_checks
   postmap /etc/postfix/smtp_header_checks
   postconf -e 'smtp_header_checks = regexp:/etc/postfix/smtp_header_checks'
   echo "Setting configuration option OVERWRITE_FROM with value: ${OVERWRITE_FROM}"
