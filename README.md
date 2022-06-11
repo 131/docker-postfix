@@ -23,6 +23,9 @@ The following env variables need to be passed to the container:
 The following env variable(s) are optional.
 * `SMTP_HEADER_TAG` This will add a header for tracking messages upstream. Helpful for spam filters. Will appear as "RelayTag: ${SMTP_HEADER_TAG}" in the email headers.
 
+
+* `SMTPD_PROXY` This setting will allow you configure the inbound proxy protocol (e.g. SMTPD_PROXY=haproxy)
+
 * `SMTP_NETWORKS` Setting this will allow you to add additional, comma seperated, subnets to use the relay. Used like
     -e SMTP_NETWORKS='xxx.xxx.xxx.xxx/xx,xxx.xxx.xxx.xxx/xx'
 
